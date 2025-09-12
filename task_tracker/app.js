@@ -20,6 +20,14 @@ function addTask() {
     span.addEventListener('click', () => {
         li.classList.toggle('completed');
     });
+
+    // Delete button
+    const delBtn = document.createElement('button');
+    delBtn.textContent = '✕';
+    delBtn.addEventListener('click', () => li.remove());
+
+    li.append(span, delBtn);
+    list.appendChild(li);
 }
 
 // Event listeners
