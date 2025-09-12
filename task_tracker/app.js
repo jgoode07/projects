@@ -14,6 +14,36 @@ function saveTasks() {
     localStorage.setItem('tasks', JSON.stringify(tasks));
 }
 
+// Load tasks from localStorage
+function loadTasks() {
+    const stored = JSON.parse(localStorage.getItem('tasks')) || [];
+    stored.forEach(t => {
+        const li = document.createElement('li');
+        li.className = 'task';
+        if (t.completed) li.classList.add('completed');
+
+        const span = document.createElement('span');
+        span.textContent = t.text;
+
+        // Toggle completed
+        span.addEventListener('click', () => {
+            li.classList.toggle('completed');
+            saveTasks();
+        });
+
+        // Delete button
+        const delBtn = document.createElement('button');
+        delBtn.textContent = 'X';
+        delBtn.addEventListener('click', () => {
+            li.remove();
+            saveTasks();
+        });
+
+        li.append(span, delBtn);
+        list.appendChild(li);
+    });
+}
+
 // Add task function
 function addTask() {
     const text = input.value.trim();
@@ -43,6 +73,9 @@ function addTask() {
     // Reset input
     input.value = '';
     input.focus();
+
+    // Save tasks after adding
+    saveTasks();
 }
 
 // Event listeners
@@ -50,3 +83,6 @@ addBtn.addEventListener('click', addTask);
 input.addEventListener('keydown', (e) => {
     if (e.key === 'Enter') addTask();
 });
+
+// Load saved tasks on page load
+loadTasks();
