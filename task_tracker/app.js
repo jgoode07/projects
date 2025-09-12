@@ -2,6 +2,7 @@
 const input = document.getElementById('taskInput');
 const addBtn = document.getElementById('addTaskBtn');
 const list = document.getElementById('taskList');
+const clearBtn = document.getElementById('clearTasksBtn');
 
 // Save tasks to localStorage
 function saveTasks() {
@@ -80,9 +81,16 @@ function addTask() {
 
 // Event listeners
 addBtn.addEventListener('click', addTask);
+clearBtn.addEventListener('click', clearAllTasks);
 input.addEventListener('keydown', (e) => {
     if (e.key === 'Enter') addTask();
 });
+
+// Remove all tasks from the list and clear localStorage
+function clearAllTasks() {
+    list.innerHTML = '';
+    localStorage.removeItem('tasks');
+}
 
 // Load saved tasks on page load
 loadTasks();
