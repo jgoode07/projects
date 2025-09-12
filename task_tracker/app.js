@@ -3,6 +3,17 @@ const input = document.getElementById('taskInput');
 const addBtn = document.getElementById('addTaskBtn');
 const list = document.getElementById('taskList');
 
+// Save tasks to localStorage
+function saveTasks() {
+    const tasks = [];
+    document.querySelectorAll('#taskList .task').forEach(task => {
+        const taskText = task.querySelector('span').textContent;
+        const isDone = task.classList.contains('completed');
+        tasks.push({ text: taskText, completed: isDone });
+    });
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+}
+
 // Add task function
 function addTask() {
     const text = input.value.trim();
