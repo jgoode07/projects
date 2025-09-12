@@ -28,6 +28,10 @@ function addTask() {
 
     li.append(span, delBtn);
     list.appendChild(li);
+
+    // Reset input
+    input.value = '';
+    input.focus();
 }
 
 // Event listeners
