@@ -3,7 +3,10 @@
    ========================= */
 body {
   font-family: Arial, sans-serif;
-  background: #f4f4f4;
+  background: linear-gradient(135deg, #1b1b3a, #2e236c);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
   margin: 0;
   padding: 1.25rem;
 }
@@ -13,17 +16,19 @@ body {
    ========================= */
 #hero {
   text-align: center;
+  margin-top: 4rem;
   margin-bottom: 2rem;
 }
 
 #hero h1 {
   margin: 0;
+  color: #fff;
   font-size: 2rem;
 }
 
 #hero p {
   margin-top: 0.3rem;
-  color: #555;
+  color: #ddd;
   font-size: 1rem;
 }
 
@@ -76,9 +81,19 @@ body {
   font-weight: bold;
 }
 
+.task.completed {
+  background: #f0f0f0;
+  color: #777;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
 .task.completed span {
   text-decoration: line-through;
-  color: #888;
+  opacity: 0.7;
+}
+
+.task.completed button {
+  text-decoration: none;
 }
 
 #clearTasksBtn {

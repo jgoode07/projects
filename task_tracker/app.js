@@ -51,7 +51,6 @@ function addTask() {
     // Ignore empty input
     if (!text) return;
 
-    // Create list item
     const li = document.createElement('li');
     li.className = 'task';
 
