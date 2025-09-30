@@ -60,11 +60,26 @@ function addTask() {
 
     // Add date display if provided
     if (dueDate) {
+        const today = new Date();
+        const taskDate = new Date(dueDate);
+
         const dateSpan = document.createElement('small');
         dateSpan.textContent = ` (Due: ${dueDate})`;
-        dateSpan.classList.add('due-date')
+        dateSpan.classList.add('due-date');
+
+        // Compare dates
+        if (taskDate < today.setHours(0, 0, 0, 0)) {
+            dateSpan.classList.add('overdue');
+        } else {
+            const diff = (taskDate - today) / (1000 * 60 * 60 * 24);
+            if (diff <= 2) {
+                dateSpan.classList.add('soon');
+            }
+        }
+
         span.appendChild(dateSpan);
     }
+
 
     // Complete on click
     span.addEventListener('click', () => {
