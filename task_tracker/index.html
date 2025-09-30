@@ -21,8 +21,15 @@
         <!-- Task section: form + list + date + clear button -->
         <section id="taskSection">
             <div class="task-form">
-                <input type="text" id="taskInput" placeholder="Enter a task...">
-                <input type="date" id="dueDateInput">
+                <div class="input-group">
+                    <label for="taskInput">Task</label>
+                    <input type="text" id="taskInput" placeholder="Enter a task...">
+                </div>
+
+                <div class="input-group">
+                    <label for="dueDateInput">Due Date</label>
+                    <input type="date" id="dueDateInput">
+                </div>
             </div>
             <button id="addTaskBtn">Add Task</button>
             <ul id="taskList"></ul>
