@@ -62,9 +62,7 @@ function addTask() {
     if (dueDate) {
         const dateSpan = document.createElement('small');
         dateSpan.textContent = ` (Due: ${dueDate})`;
-        dateSpan.style.marginLeft = "0.5rem";
-        dateSpan.style.fontSize = "0.85rem";
-        dateSpan.style.color = "#555";
+        dateSpan.classList.add('due-date')
         span.appendChild(dateSpan);
     }
 
