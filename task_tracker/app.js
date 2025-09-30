@@ -32,17 +32,6 @@ function loadTasks() {
         const span = document.createElement('span');
         span.textContent = t.text;
 
-        // Add a small due date display
-        if (t.dueDate) {
-            const dateSpan = document.createElement('small');
-            dateSpan.textContent = ` (Due: ${t.dueDate})`;
-            dateSpan.style.marginLeft = "0.5rem";
-            dateSpan.style.fontSize = "0.85rem";
-            dateSpan.style.color = "#555";
-            span.appendChild(dateSpan);
-        }
-
-
         // Delete button
         const delBtn = document.createElement('button');
         delBtn.textContent = 'X';
