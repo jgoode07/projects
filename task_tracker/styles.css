@@ -2,7 +2,7 @@
    Base Styles
    ========================= */
 body {
-  font-family: Arial, sans-serif;
+  font-family: 'Poppins', sans-serif;
   background: linear-gradient(135deg, #1b1b3a, #2e236c);
   background-repeat: no-repeat;
   background-attachment: fixed;
