@@ -5,6 +5,27 @@ const addBtn = document.getElementById('addTaskBtn');
 const list = document.getElementById('taskList');
 const clearBtn = document.getElementById('clearTasksBtn');
 
+// Helper to create a styled due date span
+function createDueDateSpan(dueDate) {
+    const dateSpan = document.createElement('small');
+    dateSpan.textContent = ` (Due: ${dueDate})`;
+    dateSpan.classList.add('due-date');
+
+    const today = new Date();
+    const taskDate = new Date(dueDate);
+
+    if (taskDate < today.setHours(0, 0, 0, 0)) {
+        dateSpan.classList.add('overdue');
+    } else {
+        const diff = (taskDate - today) / (1000 * 60 * 60 * 24);
+        if (diff <= 2) {
+            dateSpan.classList.add('soon');
+        }
+    }
+
+    return dateSpan;
+}
+
 // Save tasks to localStorage
 function saveTasks() {
     const tasks = [];
@@ -26,15 +47,27 @@ function loadTasks() {
         li.className = 'task';
         if (t.completed) li.classList.add('completed');
 
-        // save due date as attribute for later reference
-        if (t.dueDate) li.setAttribute('data-due', t.dueDate);
+        // Store due date back as data attribute
+        if (t.dueDate) li.dataset.due = t.dueDate;
 
+        // Task text
         const span = document.createElement('span');
         span.textContent = t.text;
 
+        // Add due date element if it exists
+        if (t.dueDate) {
+            span.appendChild(createDueDateSpan(t.dueDate));
+        }
+
+        // Complete on click
+        span.addEventListener('click', () => {
+            li.classList.toggle('completed');
+            saveTasks();
+        });
+
         // Delete button
         const delBtn = document.createElement('button');
-        delBtn.textContent = 'X';
+        delBtn.textContent = '✕';
         delBtn.addEventListener('click', () => {
             li.remove();
             saveTasks();
