@@ -30,7 +30,10 @@ function createDueDateSpan(dueDate) {
 function saveTasks() {
     const tasks = [];
     document.querySelectorAll('#taskList .task').forEach(task => {
-        const taskText = task.querySelector('span').textContent;
+        const span = task.querySelector('span');
+
+        const taskText = span.childNodes[0].nodeValue.trim();
+
         const isDone = task.classList.contains('completed');
         const dueDate = task.getAttribute('data-due');   // pull from custom attribute
 
@@ -38,6 +41,7 @@ function saveTasks() {
     });
     localStorage.setItem('tasks', JSON.stringify(tasks));
 }
+
 
 // Load tasks from localStorage
 function loadTasks() {
@@ -78,7 +82,6 @@ function loadTasks() {
     });
 }
 
-// Add task function
 function addTask() {
     const text = input.value.trim();
     const dueDate = dueDateInput.value;
@@ -91,38 +94,23 @@ function addTask() {
     const span = document.createElement('span');
     span.textContent = text;
 
-    // Add date display if provided
     if (dueDate) {
-        const today = new Date();
-        const taskDate = new Date(dueDate);
-
-        const dateSpan = document.createElement('small');
-        dateSpan.textContent = ` (Due: ${dueDate})`;
-        dateSpan.classList.add('due-date');
-
-        // Compare dates
-        if (taskDate < today.setHours(0, 0, 0, 0)) {
-            dateSpan.classList.add('overdue');
-        } else {
-            const diff = (taskDate - today) / (1000 * 60 * 60 * 24);
-            if (diff <= 2) {
-                dateSpan.classList.add('soon');
-            }
-        }
-
-        span.appendChild(dateSpan);
+        span.appendChild(createDueDateSpan(dueDate));
     }
-
 
     // Complete on click
     span.addEventListener('click', () => {
         li.classList.toggle('completed');
+        saveTasks();
     });
 
     // Delete button
     const delBtn = document.createElement('button');
     delBtn.textContent = '✕';
-    delBtn.addEventListener('click', () => li.remove());
+    delBtn.addEventListener('click', () => {
+        li.remove();
+        saveTasks();
+    });
 
     li.append(span, delBtn);
     list.appendChild(li);
@@ -132,7 +120,6 @@ function addTask() {
     dueDateInput.value = '';
     input.focus();
 
-    // Save tasks after adding
     saveTasks();
 }
 
