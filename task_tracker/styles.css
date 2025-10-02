@@ -164,3 +164,33 @@ body {
 #clearTasksBtn:hover {
   background: #c0392b;
 }
+
+/* =========================
+   Completed/Overdue Lists
+   ========================= */
+#extraLists {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.list-column {
+  flex: 1;
+  background: #f5f5f5;
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+#completedList li {
+  background: #c8e6c9;
+  margin-bottom: 0.5rem;
+  padding: 0.5rem;
+  border-radius: 4px;
+}
+
+#overdueList li {
+  background: #f8d7da;
+  margin-bottom: 0.5rem;
+  padding: 0.5rem;
+  border-radius: 4px;
+}
